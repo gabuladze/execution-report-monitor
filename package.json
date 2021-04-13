@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/gabuladze/execution-report-monitor/issues"
   },
-  "homepage": "https://github.com/gabuladze/execution-report-monitor#readme"
+  "homepage": "https://github.com/gabuladze/execution-report-monitor#readme",
+  "dependencies": {
+    "ws": "^7.4.4"
+  }
 }
