@@ -1,6 +1,8 @@
+const axios = require('axios')
+const querystring = require('querystring')
 const crypto = require('crypto')
 
-const { API_KEY, SECRET } = require('../config')
+const { API_URL, API_KEY, SECRET } = require('../config')
 
 /**
  * Returns the sha256 HMAC hash for paramString & secret combo
@@ -30,4 +32,26 @@ const getHeaders = () => {
   return headers
 }
 
-module.exports = { getSignature, getHeaders }
+/**
+ * Returns new listenKey
+ * The lilistenKey is valid for 60 minutes unless a keepalive is sent.
+ * @async
+ */
+const createListenKey = async () => {
+  try {
+    const url = `${API_URL}/v3/userDataStream`
+    const headers = getHeaders()
+
+    const response = await axios.post(url, '', { headers })
+
+    return response.data
+  } catch (error) {
+    console.log('Error when creating listen key')
+    console.log(error.stack)
+    if (error.response) {
+      console.log('error.response.data=', error.response.data)
+    }
+  }
+}
+
+module.exports = { getSignature, getHeaders, createListenKey }
