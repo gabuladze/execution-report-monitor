@@ -1,5 +1,4 @@
 const axios = require('axios')
-const querystring = require('querystring')
 const crypto = require('crypto')
 
 const { API_URL, API_KEY, SECRET } = require('../config')
