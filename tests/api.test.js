@@ -37,13 +37,13 @@ describe('Test API functions', () => {
     expect(result).toHaveProperty('X-MBX-APIKEY', API_KEY)
   })
 
-  test.skip('createListenKey must return new listen key', async () => {
+  test('createListenKey must return new listen key', async () => {
     // Arrange
     expect.assertions(1)
 
     // Act
-    const result = API.createListenKey()
-    console.log(result)
+    const result = await API.createListenKey()
+
     // Assert
     expect(result).toHaveProperty('listenKey')
   })
