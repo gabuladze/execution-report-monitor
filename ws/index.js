@@ -35,11 +35,7 @@ const init = async () => {
         console.log('message=', message)
       })
       conn.on('error', eventHandlers.onError)
-      conn.on('close', (code, reason) => {
-        console.log('CONNECTION CLOSE')
-        console.log('code=', code)
-        console.log('reason=', reason)
-      })
+      conn.on('close', eventHandlers.onClose)
       conn.on('unexpected-response', (request, response) => {
         console.log('UNEXPECTED-RESPONSE')
         // console.log('request=', request)

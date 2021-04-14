@@ -13,4 +13,10 @@ const onError = (error) => {
   console.log('error stacktrace: ', error.stack)
 }
 
-module.exports = { onOpen, onError }
+const onClose = (code, reason) => {
+  console.log('Connection closed!')
+  console.log('code=', code)
+  console.log('reason=', reason)
+}
+
+module.exports = { onOpen, onError, onClose }
