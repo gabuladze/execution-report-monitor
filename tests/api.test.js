@@ -23,7 +23,7 @@ describe('Test API functions', () => {
     const result = API.getSignature(paramString)
 
     // Assert
-    expect(result).toHaveProperty('signature', expectedSignature)
+    expect(result).toEqual(expectedSignature)
   })
   test('getHeaders must return content-type & apikey headers', async () => {
     // Arrange
@@ -46,5 +46,37 @@ describe('Test API functions', () => {
 
     // Assert
     expect(result).toHaveProperty('listenKey')
+  })
+
+  test.only('getAccountInfo must return current account info', async () => {
+    // Arrange
+    expect.assertions(14)
+
+    // Act
+    const result = await API.getAccountInfo()
+
+    // Assert
+    expect(result).toHaveProperty('makerCommission')
+    expect(result).toHaveProperty('makerCommission')
+    expect(result).toHaveProperty('takerCommission')
+    expect(result).toHaveProperty('buyerCommission')
+    expect(result).toHaveProperty('sellerCommission')
+    expect(result).toHaveProperty('canTrade')
+    expect(result).toHaveProperty('canWithdraw')
+    expect(result).toHaveProperty('canDeposit')
+    expect(result).toHaveProperty('updateTime')
+    expect(result).toHaveProperty('accountType')
+    expect(result).toHaveProperty('balances')
+    expect(Array.isArray(result.balances)).toBe(true)
+    expect(Array.isArray(result.permissions)).toBe(true)
+    expect(result.balances).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          asset: expect.any(String),
+          free: expect.any(String),
+          locked: expect.any(String)
+        })
+      ])
+    )
   })
 })
