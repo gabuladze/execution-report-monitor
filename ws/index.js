@@ -36,11 +36,7 @@ const init = async () => {
       })
       conn.on('error', eventHandlers.onError)
       conn.on('close', eventHandlers.onClose)
-      conn.on('unexpected-response', (request, response) => {
-        console.log('UNEXPECTED-RESPONSE')
-        // console.log('request=', request)
-        // console.log('response=', response)
-      })
+      conn.on('unexpected-response', eventHandlers.onUnexpectedResponse)
     }
 
     console.log('Websocket connection has been initialized!')
