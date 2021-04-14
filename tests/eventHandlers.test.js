@@ -43,4 +43,20 @@ describe('Test API functions', () => {
     expect(consoleSpy).toHaveBeenCalledWith('code=', testCode)
     expect(consoleSpy).toHaveBeenCalledWith('reason=', testReason)
   })
+
+  test('onUnexpectedResponse must log correct message', async () => {
+    // Arrange
+    expect.assertions(3)
+    const consoleSpy = jest.spyOn(console, 'log')
+    const testReqObj = {}
+    const testResObj = {}
+
+    // Act
+    eventHandlers.onUnexpectedResponse(testReqObj, testResObj)
+
+    // Assert
+    expect(consoleSpy).toHaveBeenCalledWith('Unexpected response!')
+    expect(consoleSpy).toHaveBeenCalledWith('request=', testReqObj)
+    expect(consoleSpy).toHaveBeenCalledWith('response=', testResObj)
+  })
 })
