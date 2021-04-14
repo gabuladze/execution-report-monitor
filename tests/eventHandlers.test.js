@@ -1,6 +1,6 @@
 const eventHandlers = require('../ws/eventHandlers.js')
 
-describe('Test API functions', () => {
+describe('Test websocket event handlers', () => {
   test('onOpen must log correct message', async () => {
     // Arrange
     expect.assertions(1)
