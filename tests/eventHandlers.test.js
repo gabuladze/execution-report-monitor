@@ -27,4 +27,20 @@ describe('Test API functions', () => {
     // Assert
     expect(consoleSpy).toHaveBeenCalledWith(expectedMessage)
   })
+
+  test('onClose must log close code & reason', async () => {
+    // Arrange
+    expect.assertions(3)
+    const consoleSpy = jest.spyOn(console, 'log')
+    const testCode = 1006
+    const testReason = 'close'
+
+    // Act
+    eventHandlers.onClose(testCode, testReason)
+
+    // Assert
+    expect(consoleSpy).toHaveBeenCalledWith('Connection closed!')
+    expect(consoleSpy).toHaveBeenCalledWith('code=', testCode)
+    expect(consoleSpy).toHaveBeenCalledWith('reason=', testReason)
+  })
 })
