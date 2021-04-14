@@ -1,6 +1,7 @@
 const querystring = require('querystring')
 const crypto = require('crypto')
 const API = require('../api')
+const APIUtils = require('../api/utils.js')
 const { API_KEY, SECRET } = require('../config')
 
 describe('Test API functions', () => {
@@ -20,7 +21,7 @@ describe('Test API functions', () => {
     const expectedSignature = crypto.createHmac('sha256', SECRET).update(paramString).digest('hex')
 
     // Act
-    const result = API.getSignature(paramString)
+    const result = APIUtils.getSignature(paramString)
 
     // Assert
     expect(result).toEqual(expectedSignature)
@@ -30,30 +31,30 @@ describe('Test API functions', () => {
     expect.assertions(2)
 
     // Act
-    const result = API.getHeaders()
+    const result = APIUtils.getHeaders()
 
     // Assert
     expect(result).toHaveProperty('Content-Type', 'application/x-www-form-urlencoded')
     expect(result).toHaveProperty('X-MBX-APIKEY', API_KEY)
   })
 
-  test('createListenKey must return new listen key', async () => {
+  test.skip('createListenKey must return new listen key', async () => {
     // Arrange
     expect.assertions(1)
 
     // Act
-    const result = await API.createListenKey()
+    const result = await API.userDataStreams.createListenKey()
 
     // Assert
     expect(result).toHaveProperty('listenKey')
   })
 
-  test.only('getAccountInfo must return current account info', async () => {
+  test('getAccountInfo must return current account info', async () => {
     // Arrange
     expect.assertions(14)
 
     // Act
-    const result = await API.getAccountInfo()
+    const result = await API.spotAccount.getAccountInfo()
 
     // Assert
     expect(result).toHaveProperty('makerCommission')
@@ -78,5 +79,16 @@ describe('Test API functions', () => {
         })
       ])
     )
+  })
+
+  test.skip('storeOrder must store new order', async () => {
+    // Arrange
+    expect.assertions()
+
+    // Act
+    const result = await API.spotAccount.storeOrder()
+    console.log(result)
+    // Assert
+    expect(result).toBeTruthy()
   })
 })
