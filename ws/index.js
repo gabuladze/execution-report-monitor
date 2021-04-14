@@ -34,10 +34,7 @@ const init = async () => {
         console.log('RECEIVED MESSAGE')
         console.log('message=', message)
       })
-      conn.on('error', (error) => {
-        console.log('RECEIVED ERROR')
-        console.log('error=', error)
-      })
+      conn.on('error', eventHandlers.onError)
       conn.on('close', (code, reason) => {
         console.log('CONNECTION CLOSE')
         console.log('code=', code)
