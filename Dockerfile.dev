@@ -1,4 +1,5 @@
 FROM node:14.16.1-alpine
 WORKDIR /usr/src/app
-RUN npm i -g nodemon
+COPY package*.json .
+RUN npm i && npm i -g nodemon
 CMD ["nodemon", "index.js"]
