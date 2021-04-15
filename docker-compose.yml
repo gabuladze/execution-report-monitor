@@ -6,7 +6,8 @@ services:
       dockerfile: Dockerfile.dev
     container_name: execution-report-monitor
     volumes:
-      - .:/usr/src/app
+      - .:/usr/app
+      - /usr/app/node_modules
     environment:
       - TERM=xterm-256color
     env_file:
