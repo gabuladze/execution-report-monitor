@@ -1,10 +1,9 @@
 const HttpClient = require('../api/httpClient')
-const { API_KEY, SECRET } = require('../config')
 const UserDataStreamsService = require('../api/userDataStreamsService.js')
 
 let UserDataStreamsServiceInstance
 beforeAll(async () => {
-  UserDataStreamsServiceInstance = new UserDataStreamsService({ HttpClient, apiKey: API_KEY, apiSecret: SECRET })
+  UserDataStreamsServiceInstance = new UserDataStreamsService({ HttpClient })
 })
 
 describe('Test UserDataStreamsService', () => {

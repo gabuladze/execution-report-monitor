@@ -1,10 +1,9 @@
 const HttpClient = require('../api/httpClient')
-const { API_KEY, SECRET } = require('../config')
 const SpotAccountService = require('../api/spotAccountsService.js')
 
 let SpotAccountServiceInstance
 beforeAll(async () => {
-  SpotAccountServiceInstance = new SpotAccountService({ HttpClient, apiKey: API_KEY, apiSecret: SECRET })
+  SpotAccountServiceInstance = new SpotAccountService({ HttpClient })
 })
 
 describe('Test SpotAccountService', () => {
@@ -14,7 +13,7 @@ describe('Test SpotAccountService', () => {
 
     // Act
     const result = await SpotAccountServiceInstance.getAccountInfo()
-
+console.log(result)
     // Assert
     expect(result).toHaveProperty('makerCommission')
     expect(result).toHaveProperty('makerCommission')
