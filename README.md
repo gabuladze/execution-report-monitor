@@ -48,14 +48,18 @@ To run the app:
 2. Run `npm start`
 
 ### Sending orders
-You can use `scripts/createTestOrder.js` to create a new order. You can change values for `testOrderParams` object parameters to send desired order. To run it:
+You can use `scripts/createTestOrder.js` to create a new market order. You can pass `symbol`, `side` & `quantity` parameters from command line. Like so:
 ```
-node scripts/createTestOrder.js
+node scripts/createTestOrder.js symbol side quantity
+```
+Example:
+```
+node scripts/createTestOrder.js BNBBUSD BUY 10
 ```
 
 or if you used docker-compose:
 ```
-docker exec -it execution-report-monitor node scripts/createTestOrder.js
+docker exec -it execution-report-monitor node scripts/createTestOrder.js BNBBUSD BUY 10
 ```
 
 # Tests
