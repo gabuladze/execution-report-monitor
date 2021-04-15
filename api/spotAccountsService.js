@@ -24,16 +24,11 @@ class SpotAccountsService extends Service {
   /**
    * Returns account info from `GET /api/v3/account`
    * @async
+   * @param {object} params - Object with order params
    */
-  async storeOrder () {
+  async newOrder (params) {
     try {
-      const params = {
-        symbol: 'BNBBUSD',
-        side: 'SELL',
-        type: 'MARKET',
-        quantity: '10',
-        timestamp: Date.now()
-      }
+      if (!params) throw new Error('ERR_PARAMS_REQUIRED')
 
       const response = await this.HttpClient.post('/v3/order', null, { params, secure: true })
 
