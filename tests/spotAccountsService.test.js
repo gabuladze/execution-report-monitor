@@ -13,7 +13,7 @@ describe('Test SpotAccountService', () => {
 
     // Act
     const result = await SpotAccountServiceInstance.getAccountInfo()
-console.log(result)
+
     // Assert
     expect(result).toHaveProperty('makerCommission')
     expect(result).toHaveProperty('makerCommission')
