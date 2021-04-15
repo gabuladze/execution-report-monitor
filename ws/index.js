@@ -1,7 +1,6 @@
 
 const WebSocket = require('ws')
 const { STREAM_WS_URL } = require('../config')
-const API = require('../api')
 const eventHandlers = require('./eventHandlers.js')
 
 let conn = null // Websocket connection instance
