@@ -5,6 +5,8 @@ const { X } = require('../config')
  */
 const onOpen = () => {
   console.log('Websocket connection opened!')
+
+  return true
 }
 
 /**
@@ -13,6 +15,8 @@ const onOpen = () => {
 const onError = (error) => {
   console.log('Received error event!')
   console.log('error stacktrace: ', error.stack)
+
+  return true
 }
 
 /**
@@ -22,6 +26,8 @@ const onClose = (code, reason) => {
   console.log('Connection closed!')
   console.log('code=', code)
   console.log('reason=', reason)
+
+  return true
 }
 
 /**
@@ -31,6 +37,8 @@ const onUnexpectedResponse = (request, response) => {
   console.log('Unexpected response!')
   console.log('request=', request)
   console.log('response=', response)
+
+  return true
 }
 
 /**
@@ -53,6 +61,8 @@ const onMessage = (message) => {
   } else {
     console.log(`executionReport has been delivered delayed over ${X}ms. orderId=${orderId} eventTime=${eventTime} receiveTs=${receiveTs}`)
   }
+
+  return true
 }
 
 module.exports = { onOpen, onError, onClose, onUnexpectedResponse, onMessage }
