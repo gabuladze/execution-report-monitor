@@ -2,7 +2,7 @@ const Service = require('./service.js')
 
 class SpotAccountsService extends Service {
   /**
-   * Returns account info from `GET /api/v3/account`
+   * Returns account info from `GET /v3/account`
    * @async
    */
   async getAccountInfo () {
@@ -22,7 +22,7 @@ class SpotAccountsService extends Service {
   }
 
   /**
-   * Returns account info from `GET /api/v3/account`
+   * Creates & return new order `POst /v3/order`
    * @async
    * @param {object} params - Object with order params
    */
