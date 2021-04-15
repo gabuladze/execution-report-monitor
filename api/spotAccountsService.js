@@ -1,4 +1,3 @@
-const querystring = require('querystring')
 const Service = require('./service.js')
 
 class SpotAccountsService extends Service {
@@ -9,12 +8,8 @@ class SpotAccountsService extends Service {
   async getAccountInfo () {
     try {
       const params = { timestamp: Date.now() }
-      const paramString = querystring.stringify(params)
 
-      // Add HMAC signature to param string
-      params.signature = this.getSignature(paramString)
-
-      const response = await this.HttpClient.get('/v3/account', { params })
+      const response = await this.HttpClient.get('/v3/account', { params, secure: true })
 
       return response.data
     } catch (error) {
@@ -39,12 +34,8 @@ class SpotAccountsService extends Service {
         quantity: '10',
         timestamp: Date.now()
       }
-      const paramString = querystring.stringify(params)
 
-      // Add HMAC signature to param string
-      params.signature = this.getSignature(paramString)
-
-      const response = await this.HttpClient.post('/v3/order', null, { params })
+      const response = await this.HttpClient.post('/v3/order', null, { params, secure: true })
 
       return response.data
     } catch (error) {
