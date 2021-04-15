@@ -16,7 +16,8 @@ async function start () {
     console.log('Sending test order with params:', testOrderParams)
     console.log('Please check the app log for websocket messages')
 
-    await SpotAccountsServiceInstance.newOrder(testOrderParams)
+    const responseData = await SpotAccountsServiceInstance.newOrder(testOrderParams)
+    console.log('Response data: ', responseData)
   } catch (error) {
     console.log('Error:', error.stack)
   }
