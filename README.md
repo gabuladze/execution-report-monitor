@@ -1,4 +1,4 @@
-Small Node.js app for monitoring executionReport event time delay.
+Small Node.js app for monitoring executionReport event time delay. 
 
 # Problem Statement
 Write a small app that can monitor the `executionReport` websocket message delay for X ms. If your order is matched, there will be a message with event type `executionReport` gives many details. We want to have a small application that can alert us if the Event time is delivered delayed up to X ms.
@@ -40,4 +40,4 @@ To run the app:
 2. Run `npm start`
 
 # Tests
-I've included few simple unit tests in the tests directory. To run them run: `npm test` or if you docker-compose: `docker exec -it execution-report-monitor npm test`
+I've included few simple unit tests in the tests directory. To run them run: `npm test` or if you used docker-compose: `docker exec -it execution-report-monitor npm test`
