@@ -1,3 +1,5 @@
+const { X } = require('../config')
+
 /**
  * Handler for 'open' event
  */
@@ -31,4 +33,25 @@ const onUnexpectedResponse = (request, response) => {
   console.log('response=', response)
 }
 
-module.exports = { onOpen, onError, onClose, onUnexpectedResponse }
+/**
+ * Handler for 'message' event
+ */
+const onMessage = (message) => {
+  const messageJson = JSON.parse(message)
+
+  // Ignore events other than 'executionReport'
+  if (messageJson.e !== 'executionReport') return true
+
+  const eventTime = messageJson.E
+  const orderId = messageJson.i
+  const receiveTs = Date.now()
+  const delay = receiveTs - eventTime
+  const delayedUpToX = delay <= X
+  if (delayedUpToX) {
+    console.log(`executionReport has been delivered delayed up to ${X}ms. orderId=${orderId} eventTime=${eventTime} receiveTs=${receiveTs}`)
+  } else {
+    console.log(`executionReport has been delivered delayed over ${X}ms. orderId=${orderId} eventTime=${eventTime} receiveTs=${receiveTs}`)
+  }
+}
+
+module.exports = { onOpen, onError, onClose, onUnexpectedResponse, onMessage }

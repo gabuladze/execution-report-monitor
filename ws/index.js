@@ -30,10 +30,7 @@ const init = async () => {
       //     console.log('data=', data)
       //   })
 
-      conn.on('message', (message) => {
-        console.log('RECEIVED MESSAGE')
-        console.log('message=', message)
-      })
+      conn.on('message', eventHandlers.onMessage)
       conn.on('error', eventHandlers.onError)
       conn.on('close', eventHandlers.onClose)
       conn.on('unexpected-response', eventHandlers.onUnexpectedResponse)
