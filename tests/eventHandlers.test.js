@@ -65,7 +65,7 @@ describe('Test websocket event handlers', () => {
     // Arrange
     expect.assertions(1)
     const consoleSpy = jest.spyOn(console, 'log')
-    const params = {
+    const message = {
       e: 'executionReport',
       E: Date.now() - Math.floor(X / 2),
       s: 'ETHBTC',
@@ -99,11 +99,13 @@ describe('Test websocket event handlers', () => {
       Y: '0.00000000',
       Q: '0.00000000'
     }
-    const paramsStringified = JSON.stringify(params)
-    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed up to ${X}ms. orderId=${params.i} eventTime=${params.E}`)
+    const params = {
+      data: JSON.stringify(message)
+    }
+    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed up to ${X}ms. orderId=${message.i} eventTime=${message.E}`)
 
     // Act
-    eventHandlers.onMessage(paramsStringified)
+    eventHandlers.onMessage(params)
 
     // Assert
     expect(consoleSpy).toHaveBeenCalledWith(expectedMessage)
@@ -113,7 +115,7 @@ describe('Test websocket event handlers', () => {
     // Arrange
     expect.assertions(1)
     const consoleSpy = jest.spyOn(console, 'log')
-    const params = {
+    const message = {
       e: 'executionReport',
       E: Date.now() - X * 2,
       s: 'ETHBTC',
@@ -147,11 +149,13 @@ describe('Test websocket event handlers', () => {
       Y: '0.00000000',
       Q: '0.00000000'
     }
-    const paramsStringified = JSON.stringify(params)
-    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed over ${X}ms. orderId=${params.i} eventTime=${params.E}`)
+    const params = {
+      data: JSON.stringify(message)
+    }
+    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed over ${X}ms. orderId=${message.i} eventTime=${message.E}`)
 
     // Act
-    eventHandlers.onMessage(paramsStringified)
+    eventHandlers.onMessage(params)
 
     // Assert
     expect(consoleSpy).toHaveBeenCalledWith(expectedMessage)
