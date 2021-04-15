@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
+    "reconnecting-websocket": "^4.4.0",
     "ws": "^7.4.4"
   },
   "devDependencies": {
