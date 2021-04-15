@@ -1,6 +1,6 @@
 FROM node:14.16.1-alpine
 WORKDIR /usr/app
 COPY package*.json .
-RUN npm i && npm i -g nodemon
+RUN npm i --production=false && npm i -g nodemon
 COPY . .
 CMD ["nodemon", "index.js"]
