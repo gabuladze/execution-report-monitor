@@ -14,12 +14,16 @@ Write a small app that can monitor the `executionReport` websocket message delay
 
 # Setup
 ## 1. Create .env file
-Create the `.env` file. You can use the `.env.example` provided in the repo. Run: `cp .env.example .env` . **After this make sure to populate the env variables with correct values.**
+You can use the `.env.example` provided in the repo. Run: 
+```
+cp .env.example .env
+```
+**After this make sure to generate API key & secret and populate the .env variables with correct values.**
 
 | Parameter | Description | Default Value|
 | --- | --- | --- |
 | NODE_ENV | App Environment | Dev |
-| X | Delay in milliseconds (mentioned in problem statement) | 5000 |
+| X | 'Delay limit' in milliseconds (mentioned in problem statement) | 5000 |
 | API_URL | Base url for Binance API | https://testnet.binance.vision/api |
 | STREAM_WS_URL | Base url for Binance stream ws server | wss://testnet.binance.vision/ws |
 | API_KEY | Binance API key | |
@@ -31,7 +35,11 @@ Next step would be to run the app.
 Once started, the the app will generate `listenKey` and listen to incoming messages from Binance stream ws server.
 
 ### Start with docker-compose
-Run `docker-compose up`. This will build the docker image, install dependencies & start the `execution-report-monitor` container. You will be presented the stdout of the container. To stop, press `Ctrl+C`.
+Run: 
+```
+docker-compose up
+```
+This will build the docker image, install dependencies & start the `execution-report-monitor` container. You will be presented the stdout of the container. To stop, press `Ctrl+C`.
 
 ### Start without docker-compose
 The app was tested on Node.js v14.16.1 LTS, therefore I would suggest to use this version to avoid any bugs/anomalies.
@@ -39,5 +47,23 @@ To run the app:
 1. Run `npm i` to install the dependencies
 2. Run `npm start`
 
+### Sending orders
+You can use `scripts/createTestOrder.js` to create a new order. You can change values for `testOrderParams` object parameters to send desired order. To run it:
+```
+node scripts/createTestOrder.js
+```
+
+or if you used docker-compose:
+```
+docker exec -it execution-report-monitor node scripts/createTestOrder.js
+```
+
 # Tests
-I've included few simple unit tests in the tests directory. To run them run: `npm test` or if you used docker-compose: `docker exec -it execution-report-monitor npm test`
+I've included few simple tests in the tests directory. To run them run: 
+```
+npm test --silent
+```
+or if you used docker-compose: 
+```
+docker exec -it execution-report-monitor npm test -- --silent
+```
