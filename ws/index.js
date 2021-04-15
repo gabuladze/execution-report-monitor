@@ -12,7 +12,7 @@ const init = async () => {
     console.log('Initializing the connection to websocket server...')
     const UserDataStreamsServiceInstance = new UserDataStreamsService({ HttpClient })
     const { listenKey } = await UserDataStreamsServiceInstance.createListenKey()
-    
+
     console.log(`Created listen key... listenKey=${listenKey}`)
     // By convention, the stream is available at /ws/<listenKey>
     const streamUrl = `${STREAM_WS_URL}/${listenKey}`
@@ -21,15 +21,7 @@ const init = async () => {
       conn = new WebSocket(streamUrl)
       conn.on('open', eventHandlers.onOpen)
 
-      // conn.on('ping', (data) => {
-      //   console.log('received ping')
-      //   console.log('data=', data.toJSON())
-      // })
-
-      //   conn.on('pong', (data) => {
-      //     console.log('PONG')
-      //     console.log('data=', data)
-      //   })
+      conn.on('ping', () => conn.pong())
 
       conn.on('message', eventHandlers.onMessage)
       conn.on('error', eventHandlers.onError)
