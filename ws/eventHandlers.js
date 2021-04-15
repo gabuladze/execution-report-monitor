@@ -37,7 +37,8 @@ const onUnexpectedResponse = (request, response) => {
  * Handler for 'message' event
  */
 const onMessage = (message) => {
-  const messageJson = JSON.parse(message)
+  const { data } = message
+  const messageJson = JSON.parse(data)
 
   // Ignore events other than 'executionReport'
   if (messageJson.e !== 'executionReport') return true

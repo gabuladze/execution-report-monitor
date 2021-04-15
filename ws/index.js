@@ -15,7 +15,7 @@ const init = async () => {
     const { listenKey } = await UserDataStreamsServiceInstance.createListenKey()
 
     console.log(`Created listen key... listenKey=${listenKey}`)
-    
+
     // By convention, the stream is available at /ws/<listenKey>
     const streamUrl = `${STREAM_WS_URL}/${listenKey}`
 
