@@ -1,4 +1,5 @@
 const eventHandlers = require('../ws/eventHandlers.js')
+const { X } = require('../config')
 
 describe('Test websocket event handlers', () => {
   test('onOpen must log correct message', async () => {
@@ -58,5 +59,101 @@ describe('Test websocket event handlers', () => {
     expect(consoleSpy).toHaveBeenCalledWith('Unexpected response!')
     expect(consoleSpy).toHaveBeenCalledWith('request=', testReqObj)
     expect(consoleSpy).toHaveBeenCalledWith('response=', testResObj)
+  })
+
+  test('onMessage must log correct message if delay <= X', async () => {
+    // Arrange
+    expect.assertions(1)
+    const consoleSpy = jest.spyOn(console, 'log')
+    const params = {
+      e: 'executionReport',
+      E: Date.now() - Math.floor(X / 2),
+      s: 'ETHBTC',
+      c: 'mUvoqJxFIILMdfAW5iGSOW',
+      S: 'BUY',
+      o: 'LIMIT',
+      f: 'GTC',
+      q: '1.00000000',
+      p: '0.10264410',
+      P: '0.00000000',
+      F: '0.00000000',
+      g: -1,
+      C: null,
+      x: 'NEW',
+      X: 'NEW',
+      r: 'NONE',
+      i: 4293153,
+      l: '0.00000000',
+      z: '0.00000000',
+      L: '0.00000000',
+      n: '0',
+      N: null,
+      T: 1499405658657,
+      t: -1,
+      I: 8641984,
+      w: true,
+      m: false,
+      M: false,
+      O: 1499405658657,
+      Z: '0.00000000',
+      Y: '0.00000000',
+      Q: '0.00000000'
+    }
+    const paramsStringified = JSON.stringify(params)
+    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed up to ${X}ms. orderId=${params.i} eventTime=${params.E}`)
+
+    // Act
+    eventHandlers.onMessage(paramsStringified)
+
+    // Assert
+    expect(consoleSpy).toHaveBeenCalledWith(expectedMessage)
+  })
+
+  test('onMessage must log correct message if delay > X', async () => {
+    // Arrange
+    expect.assertions(1)
+    const consoleSpy = jest.spyOn(console, 'log')
+    const params = {
+      e: 'executionReport',
+      E: Date.now() - X * 2,
+      s: 'ETHBTC',
+      c: 'mUvoqJxFIILMdfAW5iGSOW',
+      S: 'BUY',
+      o: 'LIMIT',
+      f: 'GTC',
+      q: '1.00000000',
+      p: '0.10264410',
+      P: '0.00000000',
+      F: '0.00000000',
+      g: -1,
+      C: null,
+      x: 'NEW',
+      X: 'NEW',
+      r: 'NONE',
+      i: 4293153,
+      l: '0.00000000',
+      z: '0.00000000',
+      L: '0.00000000',
+      n: '0',
+      N: null,
+      T: 1499405658657,
+      t: -1,
+      I: 8641984,
+      w: true,
+      m: false,
+      M: false,
+      O: 1499405658657,
+      Z: '0.00000000',
+      Y: '0.00000000',
+      Q: '0.00000000'
+    }
+    const paramsStringified = JSON.stringify(params)
+    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed over ${X}ms. orderId=${params.i} eventTime=${params.E}`)
+
+    // Act
+    eventHandlers.onMessage(paramsStringified)
+
+    // Assert
+    expect(consoleSpy).toHaveBeenCalledWith(expectedMessage)
   })
 })
