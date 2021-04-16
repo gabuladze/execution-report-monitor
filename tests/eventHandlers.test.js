@@ -45,22 +45,6 @@ describe('Test websocket event handlers', () => {
     expect(consoleSpy).toHaveBeenCalledWith('wasClean=', params.wasClean)
   })
 
-  test('onUnexpectedResponse must log correct message', async () => {
-    // Arrange
-    expect.assertions(3)
-    const consoleSpy = jest.spyOn(console, 'log')
-    const testReqObj = {}
-    const testResObj = {}
-
-    // Act
-    eventHandlers.onUnexpectedResponse(testReqObj, testResObj)
-
-    // Assert
-    expect(consoleSpy).toHaveBeenCalledWith('Unexpected response!')
-    expect(consoleSpy).toHaveBeenCalledWith('request=', testReqObj)
-    expect(consoleSpy).toHaveBeenCalledWith('response=', testResObj)
-  })
-
   test('onMessage must log correct message if delay < X', async () => {
     // Arrange
     expect.assertions(1)

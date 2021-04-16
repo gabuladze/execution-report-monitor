@@ -33,17 +33,6 @@ const onClose = (event) => {
 }
 
 /**
- * Handler for 'unexpected-response' event
- */
-const onUnexpectedResponse = (request, response) => {
-  console.log('Unexpected response!')
-  console.log('request=', request)
-  console.log('response=', response)
-
-  return true
-}
-
-/**
  * Handler for 'message' event
  */
 const onMessage = (message) => {
@@ -66,4 +55,4 @@ const onMessage = (message) => {
   return true
 }
 
-module.exports = { onOpen, onError, onClose, onUnexpectedResponse, onMessage }
+module.exports = { onOpen, onError, onClose, onMessage }
