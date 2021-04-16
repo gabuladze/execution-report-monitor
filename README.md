@@ -44,7 +44,7 @@ This will build the docker image, install dependencies & start the `execution-re
 ### Start without docker-compose
 The app was tested on Node.js v14.16.1 LTS, therefore I would suggest to use this version to avoid any bugs/anomalies.
 To run the app:
-1. Run `npm i` to install the dependencies
+1. Run `npm i --production=false` to install all the dependencies
 2. Run `npm start`
 
 ### Sending orders
@@ -65,9 +65,9 @@ docker exec -it execution-report-monitor node scripts/createTestOrder.js BNBBUSD
 # Tests
 I've included few simple tests in the tests directory. To run them run: 
 ```
-npm test --silent
+npm test
 ```
 or if you used docker-compose: 
 ```
-docker exec -it execution-report-monitor npm test -- --silent
+docker exec -it execution-report-monitor npm test
 ```
