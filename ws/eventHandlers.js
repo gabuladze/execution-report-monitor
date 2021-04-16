@@ -55,11 +55,10 @@ const onMessage = (message) => {
   const orderId = messageJson.i
   const receiveTs = Date.now()
   const delay = receiveTs - eventTime
-  const delayedUpToX = delay <= X
-  if (delayedUpToX) {
-    console.log(`executionReport has been delivered delayed up to ${X}ms. orderId=${orderId} eventTime=${eventTime} receiveTs=${receiveTs}`)
+  if (delay >= X) {
+    console.log(`executionReport has been delivered delayed >= ${X}ms. orderId=${orderId} eventTime=${eventTime} receiveTs=${receiveTs} delay=${delay}`)
   } else {
-    console.log(`executionReport has been delivered delayed over ${X}ms. orderId=${orderId} eventTime=${eventTime} receiveTs=${receiveTs}`)
+    console.log(`executionReport has been delivered in under ${X}ms. orderId=${orderId} eventTime=${eventTime} receiveTs=${receiveTs} delay=${delay}`)
   }
 
   return true
