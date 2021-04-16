@@ -44,7 +44,7 @@ const onMessage = (message) => {
 
   const eventTime = messageJson.E
   const orderId = messageJson.i
-  const receiveTs = Date.now()
+  const receiveTs = new Date().getTime()
   const delay = receiveTs - eventTime
   if (delay >= X) {
     console.log(`executionReport has been delivered delayed >= ${X}ms. orderId=${orderId} eventTime=${eventTime} receiveTs=${receiveTs} delay=${delay}`)
