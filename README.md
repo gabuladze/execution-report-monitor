@@ -1,7 +1,7 @@
 Small Node.js app for monitoring executionReport event time delay. 
 
 # Problem Statement
-Write a small app that can monitor the `executionReport` websocket message delay for X ms. If your order is matched, there will be a message with event type `executionReport` gives many details. We want to have a small application that can alert us if the Event time is delivered delayed up to X ms.
+Write a small app that can monitor the `executionReport` websocket message delay for X ms. If your order is matched, there will be a message with event type `executionReport` gives many details. We want to have a small application that can alert us if the Event time is delivered delayed >= X ms.
 
 [Testnet](https://testnet.binance.vision/) has the free funds to trade.
 
@@ -23,7 +23,7 @@ cp .env.example .env
 | Parameter | Description | Default Value|
 | --- | --- | --- |
 | NODE_ENV | App Environment | Dev |
-| X | 'Delay limit' in milliseconds (mentioned in problem statement) | 5000 |
+| X | Delay in milliseconds (mentioned in problem statement) | 5000 (ms) |
 | API_URL | Base url for Binance API | https://testnet.binance.vision/api |
 | STREAM_WS_URL | Base url for Binance stream ws server | wss://testnet.binance.vision/ws |
 | API_KEY | Binance API key | |
