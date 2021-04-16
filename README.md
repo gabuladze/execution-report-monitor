@@ -42,7 +42,7 @@ docker-compose up
 This will build the docker image, install dependencies & start the `execution-report-monitor` container. You will be presented the stdout of the container. To stop, press `Ctrl+C`.
 
 ### Start without docker-compose
-The app was tested on Node.js v14.16.1 LTS, therefore I would suggest to use this version to avoid any bugs/anomalies.
+The app was tested on Node.js v14.16.1 LTS, therefore I would suggest to use this version to avoid any bugs/anomalies.  
 To run the app:
 1. Run `npm i --production=false` to install all the dependencies
 2. Run `npm start`
