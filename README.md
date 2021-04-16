@@ -23,7 +23,7 @@ cp .env.example .env
 | Parameter | Description | Default Value|
 | --- | --- | --- |
 | NODE_ENV | App Environment | Dev |
-| X | Delay in milliseconds (mentioned in problem statement) | 5000 (ms) |
+| X | Delay in milliseconds (mentioned in problem statement) | 3000 (ms) |
 | API_URL | Base url for Binance API | https://testnet.binance.vision/api |
 | STREAM_WS_URL | Base url for Binance stream ws server | wss://testnet.binance.vision/ws |
 | API_KEY | Binance API key | |
