@@ -31,18 +31,18 @@ describe('Test websocket event handlers', () => {
 
   test('onClose must log close code & reason', async () => {
     // Arrange
-    expect.assertions(3)
+    expect.assertions(4)
     const consoleSpy = jest.spyOn(console, 'log')
-    const testCode = 1006
-    const testReason = 'close'
+    const params = { code: 1006, wasClean: false, reason: '' }
 
     // Act
-    eventHandlers.onClose(testCode, testReason)
+    eventHandlers.onClose(params)
 
     // Assert
     expect(consoleSpy).toHaveBeenCalledWith('Connection closed!')
-    expect(consoleSpy).toHaveBeenCalledWith('code=', testCode)
-    expect(consoleSpy).toHaveBeenCalledWith('reason=', testReason)
+    expect(consoleSpy).toHaveBeenCalledWith('code=', params.code)
+    expect(consoleSpy).toHaveBeenCalledWith('reason=', params.reason)
+    expect(consoleSpy).toHaveBeenCalledWith('wasClean=', params.wasClean)
   })
 
   test('onUnexpectedResponse must log correct message', async () => {
