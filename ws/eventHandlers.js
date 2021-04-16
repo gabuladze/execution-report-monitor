@@ -14,7 +14,7 @@ const onOpen = () => {
  */
 const onError = (error) => {
   console.log('Received error event!')
-  console.log('error stacktrace: ', error.stack)
+  console.log('error: ', error)
 
   return true
 }
@@ -22,10 +22,12 @@ const onError = (error) => {
 /**
  * Handler for 'close' event
  */
-const onClose = (code, reason) => {
+const onClose = (event) => {
+  const { code, reason, wasClean } = event
   console.log('Connection closed!')
   console.log('code=', code)
   console.log('reason=', reason)
+  console.log('wasClean=', wasClean)
 
   return true
 }
