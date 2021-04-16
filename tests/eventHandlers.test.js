@@ -61,7 +61,7 @@ describe('Test websocket event handlers', () => {
     expect(consoleSpy).toHaveBeenCalledWith('response=', testResObj)
   })
 
-  test('onMessage must log correct message if delay <= X', async () => {
+  test('onMessage must log correct message if delay < X', async () => {
     // Arrange
     expect.assertions(1)
     const consoleSpy = jest.spyOn(console, 'log')
@@ -102,7 +102,7 @@ describe('Test websocket event handlers', () => {
     const params = {
       data: JSON.stringify(message)
     }
-    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed up to ${X}ms. orderId=${message.i} eventTime=${message.E}`)
+    const expectedMessage = expect.stringContaining(`executionReport has been delivered in under ${X}ms. orderId=${message.i} eventTime=${message.E}`)
 
     // Act
     eventHandlers.onMessage(params)
@@ -111,7 +111,7 @@ describe('Test websocket event handlers', () => {
     expect(consoleSpy).toHaveBeenCalledWith(expectedMessage)
   })
 
-  test('onMessage must log correct message if delay > X', async () => {
+  test('onMessage must log correct message if delay >= X', async () => {
     // Arrange
     expect.assertions(1)
     const consoleSpy = jest.spyOn(console, 'log')
@@ -152,7 +152,7 @@ describe('Test websocket event handlers', () => {
     const params = {
       data: JSON.stringify(message)
     }
-    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed over ${X}ms. orderId=${message.i} eventTime=${message.E}`)
+    const expectedMessage = expect.stringContaining(`executionReport has been delivered delayed >= ${X}ms. orderId=${message.i} eventTime=${message.E}`)
 
     // Act
     eventHandlers.onMessage(params)
